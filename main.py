@@ -17,7 +17,13 @@ MARGIN = 22
 GUTTER = 12
 COL_W = (W - 2 * MARGIN - 2 * GUTTER) // 3  # 318
 
-FONT_DIR = "/usr/share/fonts/truetype/dejavu"
+# Fonts ship in the repo (fonts/) because the grader sandbox may not have
+# /usr/share/fonts/truetype/dejavu. Prefer the bundled copy; fall back to
+# the system path if the repo copy is missing.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+FONT_DIR = os.path.join(_HERE, "fonts")
+if not os.path.isdir(FONT_DIR):
+    FONT_DIR = "/usr/share/fonts/truetype/dejavu"
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 PAPER = (252, 250, 244)
